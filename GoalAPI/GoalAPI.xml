@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GoalAPI</name>
+    </assembly>
+    <members>
+        <member name="M:GoalAPI.Controllers.BooksController.GetBook(System.Guid)">
+            <summary>
+            Gets a book by Id
+            </summary>
+            <param name="bookId">The id of the book you want to get</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:GoalAPI.Controllers.BooksController.PartiallyUpdateBook(System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{GoalAPI.Models.BookForUpdateDto})">
+            <summary>
+            Partially update a book
+            </summary>
+            <param name="bookId">The id of the book you want update</param>
+            <param name="patchDocument">The set of operations to apply to the book</param>
+            <returns>An ActionResult</returns>
+            <remarks>
+            Sample request (this request updates the book **title**)    
+            ```
+            PATCH /books/id   
+            [ 
+                { 
+                    "op": "replace", 
+                    "path": "/title", 
+                    "value": "new title" 
+                } 
+            ]
+            ```
+            </remarks>
+        </member>
+        <member name="T:GoalAPI.Models.BookDto">
+            <summary>
+            A book with Id, Title, Subtitle, and Author fields
+            </summary>
+        </member>
+        <member name="P:GoalAPI.Models.BookDto.Id">
+            <summary>
+            The id of the book
+            </summary>
+        </member>
+        <member name="P:GoalAPI.Models.BookDto.Title">
+            <summary>
+            The title of the book
+            </summary>
+        </member>
+        <member name="P:GoalAPI.Models.BookDto.Subtitle">
+            <summary>
+            The subtitle of the book
+            </summary>
+        </member>
+        <member name="P:GoalAPI.Models.BookDto.Author">
+            <summary>
+            The author of the book
+            </summary>
+        </member>
+        <member name="T:GoalAPI.Models.BookForUpdateDto">
+            <summary>
+            A book for update with Title, Subtitle and Author fields
+            </summary>
+        </member>
+        <member name="P:GoalAPI.Models.BookForUpdateDto.Title">
+            <summary>
+            The title of the book
+            </summary>
+        </member>
+        <member name="P:GoalAPI.Models.BookForUpdateDto.Subtitle">
+            <summary>
+            The subtitle of the book
+            </summary>
+        </member>
+        <member name="P:GoalAPI.Models.BookForUpdateDto.Author">
+            <summary>
+            The author of the book
+            </summary>
+        </member>
+        <member name="T:GoalAPI.Models.NoteDto">
+            <summary>
+            A note with Id, Content, and BookId fields
+            </summary>
+        </member>
+        <member name="P:GoalAPI.Models.NoteDto.Id">
+            <summary>
+            The id of the book note
+            </summary>
+        </member>
+        <member name="P:GoalAPI.Models.NoteDto.Content">
+            <summary>
+            The content of the book note
+            </summary>
+        </member>
+        <member name="P:GoalAPI.Models.NoteDto.BookId">
+            <summary>
+            The book id for the note
+            </summary>
+        </member>
+        <member name="T:GoalAPI.Models.NoteForUpdateDto">
+            <summary>
+            A note for update with a content field
+            </summary>
+        </member>
+        <member name="P:GoalAPI.Models.NoteForUpdateDto.Content">
+            <summary>
+            The content of the note
+            </summary>
+        </member>
+    </members>
+</doc>

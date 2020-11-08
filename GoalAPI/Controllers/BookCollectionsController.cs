@@ -8,10 +8,12 @@ using GoalAPI.Helpers;
 using GoalAPI.Models;
 using GoalAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace GoalAPI.Controllers
 {
     [ApiController]
+    [Produces("application/json", "application/xml")]
     [Route("api/bookcollections")]
     public class BookCollectionsController : ControllerBase
     {
@@ -25,6 +27,9 @@ namespace GoalAPI.Controllers
         }
 
         [HttpGet("({ids})", Name = "GetBookCollection")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public IActionResult GetBookCollection([FromRoute][ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
         {
             if (ids == null)

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using GoalAPI.Models;
 using GoalAPI.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoalAPI.Controllers
 {
     [ApiController]
+    [Produces("application/json", "application/xml")]
     [Route("api/books/{bookId}/notes")]
     public class NoteController : ControllerBase
     {
@@ -42,6 +44,10 @@ namespace GoalAPI.Controllers
             return Ok(bookNotes);
         }
 
+
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{noteId}", Name = "GetBookNote")]
         public ActionResult<NoteDto> GetBookNote(Guid bookId, Guid noteId)
         {
@@ -63,6 +69,7 @@ namespace GoalAPI.Controllers
         }
 
         [HttpPost]
+        [Consumes("application/json")]
         public ActionResult<NoteDto> CreateBookNote(Guid bookId, NoteForCreationDto note)
         {
             if (!_bookRepository.BookExists(bookId))

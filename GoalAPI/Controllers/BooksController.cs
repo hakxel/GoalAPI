@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GoalAPI.Controllers
 {
     [ApiController]
+    [Produces("application/json", "application/xml")]
     [Route("api/books")]
     public class BooksController : ControllerBase
     {
@@ -36,6 +37,11 @@ namespace GoalAPI.Controllers
             return Ok(books);
         }
 
+        /// <summary>
+        /// Gets a book by Id
+        /// </summary>
+        /// <param name="bookId">The id of the book you want to get</param>
+        /// <returns>IActionResult</returns>
         [HttpGet("{bookId:guid}", Name = "GetBook")]
         public IActionResult GetBook(Guid bookId)
         {
@@ -63,6 +69,26 @@ namespace GoalAPI.Controllers
             return CreatedAtRoute("GetBook", new { bookId = bookToReturn.Id }, bookToReturn);
         }
 
+
+        /// <summary>
+        /// Partially update a book
+        /// </summary>
+        /// <param name="bookId">The id of the book you want update</param>
+        /// <param name="patchDocument">The set of operations to apply to the book</param>
+        /// <returns>An ActionResult</returns>
+        /// <remarks>
+        /// Sample request (this request updates the book **title**)    
+        /// ```
+        /// PATCH /books/id   
+        /// [ 
+        ///     { 
+        ///         "op": "replace", 
+        ///         "path": "/title", 
+        ///         "value": "new title" 
+        ///     } 
+        /// ]
+        /// ```
+        /// </remarks>
         [HttpPatch("{bookId}")]
         public ActionResult PartiallyUpdateBook(Guid bookId, JsonPatchDocument<BookForUpdateDto> patchDocument)
         {
